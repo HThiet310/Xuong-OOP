@@ -3,7 +3,10 @@
     "autoload": {
         "psr-4": {
             "Hthiet\\Xuongoop\\": "src/"
-        }
+        },
+        "files": [
+            "helper.php"
+        ]
     },
     "require": {
         "bramus/router": "^1.6",

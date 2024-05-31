@@ -2,11 +2,13 @@
 
 namespace Hthiet\Xuongoop\Commons;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 
 class Model
 {
-    protected DriverManager|null $conn;
+    protected Connection|null $conn;
+    protected $queryBuilder;
 
     public function __construct()
     {
@@ -20,6 +22,8 @@ class Model
         ];
 
         $this->conn = DriverManager::getConnection($connectionParams);
+
+        $this->queryBuilder = $this->conn->createQueryBuilder();
     }
 
     protected function all()
@@ -27,6 +31,10 @@ class Model
     }
 
     protected function paginate($page, $perPage = 10)
+    {
+    }
+
+    protected function findByID($id)
     {
     }
 
