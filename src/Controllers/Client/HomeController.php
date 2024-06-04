@@ -12,7 +12,7 @@ class HomeController extends Controller
     {
         $name = 'Hthiet';
 
-        $this->rendViewClient('Home', [
+        $this->renderViewClient('Home', [
             'name' => $name
         ]);
     }

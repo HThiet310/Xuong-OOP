@@ -1,0 +1,12 @@
+<?php
+
+namespace Ductong\XuongOop\Controllers\Admin;
+
+use Hthiet\XuongOop\Commons\Controller;
+
+class DashboardController extends Controller
+{
+    public function dashboard() {
+        $this->renderViewAdmin(__FUNCTION__);
+    }
+}
