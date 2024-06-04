@@ -14,7 +14,8 @@
 
 <body class="crm_body_bg">
 
-    @include('layouts.partials.navbar')
+
+    @include('layouts.partials.nav')
 
     <section class="main_content dashboard_part large_header_bg">
 
@@ -24,13 +25,12 @@
             <div class="container-fluid p-0 ">
 
                 @yield('content')
-                
+
             </div>
         </div>
 
         @include('layouts.partials.footer')
     </section>
-
 
     <div id="back-top" style="display: none;">
         <a title="Go to Top" href="#">
@@ -38,9 +38,9 @@
         </a>
     </div>
 
+    @include('layouts.partials.script')
 
+    @yield('script')
 </body>
-
-<!-- Mirrored from demo.dashboardpack.com/sales-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 May 2024 07:24:00 GMT -->
 
 </html>

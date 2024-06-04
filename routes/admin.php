@@ -10,7 +10,7 @@
 //      PUT     -> USER/ID      -> UPDATE ($id)   -> LƯU DỮ LIỆU TỪ FORM CẬP NHẬT VÀO DB
 //      DELETE  -> USER/ID      -> DELETE ($id)   -> XÓA BẢ
 
-use Ductong\XuongOop\Controllers\Admin\DashboardController;
+use Hthiet\Xuongoop\Controllers\Admin\DashboardController;
 use Hthiet\Xuongoop\Controllers\Admin\UserControler;
 
 $router->mount('/admin', function () use ($router) {

@@ -1,12 +1,13 @@
 <?php
 
-namespace Ductong\XuongOop\Controllers\Admin;
+namespace Hthiet\Xuongoop\Controllers\Admin;
 
-use Hthiet\XuongOop\Commons\Controller;
+use Hthiet\Xuongoop\Commons\Controller;
+use Hthiet\Xuongoop\Commons\Helper;
 
 class DashboardController extends Controller
 {
-    public function dashboard() {
+    public function dashboard() {        
         $this->renderViewAdmin(__FUNCTION__);
     }
 }
