@@ -7,26 +7,38 @@
     </div>
     <ul id="sidebar_menu">
         <li class="mm-active">
-            <a class="has-arrow" href="#" aria-expanded="false">
+            <a href="{{ asset('admin/') }}" aria-expanded="false">
                 <div class="icon_menu">
                     <img src="{{ asset('assets/admin/img/menu-icon/dashboard.svg') }}" alt>
                 </div>
                 <span>Dashboard</span>
             </a>
+        </li>
+
+        <li class>
+            <a class="has-arrow" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('assets/admin/img/menu-icon/9.svg') }}" alt>
+                </div>
+                <span>Người dùng</span>
+            </a>
             <ul>
-                <li><a class="active" href="{{ url('admin/') }}">Sales</a></li>
-                <li><a href="{{ url('admin/') }}">Default</a></li>
-                <li><a href="{{ url('admin/') }}">Dark Menu</a></li>
+                <li><a href="{{ url('admin/users') }}" >Danh sách người dùng</a></li>
+                <li><a href="{{ url('admin/users/create') }}">Thêm người dùng</a></li>
             </ul>
         </li>
 
         <li class>
-            <a href="{{ url('admin/users') }}" aria-expanded="false">
+            <a class="has-arrow" aria-expanded="false">
                 <div class="icon_menu">
-                    <img src="{{ asset('assets/admin/img/menu-icon/5.svg') }}" alt>
+                    <img src="{{ asset('assets/admin/img/menu-icon/2.svg') }}" alt>
                 </div>
-                <span>Quảng lý người dùng</span>
+                <span>Sản phẩm</span>
             </a>
+            <ul>
+                <li><a href="{{ url('admin/products') }}" >Danh sách sản phẩm</a></li>
+                <li><a href="{{ url('admin/products/create') }}">Thêm sản phẩm</a></li>
+            </ul>
         </li>
 
     </ul>

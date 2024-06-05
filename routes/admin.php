@@ -11,6 +11,7 @@
 //      DELETE  -> USER/ID      -> DELETE ($id)   -> XÓA BẢ
 
 use Hthiet\Xuongoop\Controllers\Admin\DashboardController;
+use Hthiet\Xuongoop\Controllers\Admin\ProductController;
 use Hthiet\Xuongoop\Controllers\Admin\UserControler;
 
 $router->mount('/admin', function () use ($router) {
@@ -31,12 +32,12 @@ $router->mount('/admin', function () use ($router) {
 
     // CRUD PRODUCT
     $router->mount('/products', function () use ($router) {
-        $router->get('/',               UserControler::class . '@index');
-        $router->get('/create',         UserControler::class . '@create');
-        $router->post('/store',         UserControler::class . '@store');
-        $router->get('/{id}/show',      UserControler::class . '@show');
-        $router->get('/{id}/edit',      UserControler::class . '@edit');
-        $router->post('/{id}/update',   UserControler::class . '@update');
-        $router->get('/{id}/delete',    UserControler::class . '@delete');
+        $router->get('/',               ProductController::class . '@index');
+        $router->get('/create',         ProductController::class . '@create');
+        $router->post('/store',         ProductController::class . '@store');
+        $router->get('/{id}/show',      ProductController::class . '@show');
+        $router->get('/{id}/edit',      ProductController::class . '@edit');
+        $router->post('/{id}/update',   ProductController::class . '@update');
+        $router->get('/{id}/delete',    ProductController::class . '@delete');
     });
 });

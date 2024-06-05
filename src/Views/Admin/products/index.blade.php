@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Danh sách User
+    Danh sách Sản phẩm
 @endsection
 
 @section('content')
@@ -11,13 +11,13 @@
                 <div class="white_card_header">
                     <div class="box_header m-0">
                         <div class="main-title">
-                            <h1 class="m-0">Danh sách User</h1>
+                            <h1 class="m-0">Danh sách Sản phẩm</h1>
                         </div>
                     </div>
                 </div>
                 <div class="white_card_body">
 
-                    <a class="btn btn-primary" href="{{ url('admin/users/create') }}">Thêm mới</a>
+                    <a class="btn btn-primary" href="{{ url('admin/products/create') }}">Thêm mới sản phẩm</a>
 
                     @if (isset($_SESSION['status']) && $_SESSION['status'])
                         <div class="alert alert-success">
@@ -35,42 +35,34 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Ảnh</th>
-                                    <th>Họ tên</th>
-                                    <th>Email</th>
-                                    <th>Ngày thêm</th>
-                                    <th>Thao tác</th>
+                                    <th>Ảnh sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá sản phẩm</th>
+                                    <th>Danh mục</th>
+                                    <th>Ngày nhập sản phẩm</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Ảnh</th>
-                                    <th>Họ tên</th>
-                                    <th>Email</th>
-                                    <th>Ngày thêm</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </tfoot>
                             <tbody>
                                 <?php $stt = 1; ?>
-                                @foreach ($users as $user)
+                                @foreach ($products as $product)
                                     <tr>
                                         <td><?= $stt++ ?></td>
                                         <td>
-                                            <img src="{{ asset($user['avatar']) }}" alt="" width="100px">
+                                            <img src="{{ asset($product['p.img_thumbnail']) }}" alt="" width="100px">
                                         </td>
-                                        <td><?= $user['name'] ?></td>
-                                        <td><?= $user['email'] ?></td>
-                                        <td><?= $user['created_at'] ?></td>
+                                        <td><?= $product['p.name'] ?></td>
+                                        <td><?= $product['p.price'] ?></td>
+                                        <td><?= $product['c.name'] ?></td>
+                                        <td><?= $product['p.created_at'] ?></td>
                                         <td>
 
                                             <a class="btn btn-info"
-                                                href="{{ url('admin/users/' . $user['id'] . '/show') }}">Xem</a>
+                                                href="{{ url('admin/products/' . $product['id'] . '/show') }}">Xem</a>
                                             <a class="btn btn-warning"
-                                                href="{{ url('admin/users/' . $user['id'] . '/edit') }}">Sửa</a>
+                                                href="{{ url('admin/products/' . $product['id'] . '/edit') }}">Sửa</a>
                                             <a class="btn btn-danger"
-                                                href="{{ url('admin/users/' . $user['id'] . '/delete') }}"
+                                                href="{{ url('admin/products/' . $product['id'] . '/delete') }}"
                                                 onclick="return confirm('Chắc chắn xóa không?')">Xóa</a>
 
                                         </td>
