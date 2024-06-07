@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 07, 2024 at 10:37 AM
+-- Generation Time: Jun 07, 2024 at 01:55 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -92,7 +92,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `user_name`, `user_email`, `user_phone`, `user_address`, `shipping_name`, `shipping_email`, `shipping_phone`, `shipping_address`, `status_delivery`, `status_payment`, `created_at`, `updated_at`) VALUES
-(16, 125, 'Hoàng Thiết', 'hthiet0707@gmail.com', '0325905331', 'Tòa Nhà Ting Tong 68, Số 5, Ngách 193/220 Đường Phú Diễn', NULL, NULL, NULL, NULL, '0', 0, NULL, NULL);
+(16, 125, 'Hoàng Thiết', 'hthiet0707@gmail.com', '0325905331', 'Tòa Nhà Ting Tong 68, Số 5, Ngách 193/220 Đường Phú Diễn', NULL, NULL, NULL, NULL, '0', 0, NULL, NULL),
+(17, 128, 'Hoàng Thiết', 'hthiet111@gmail.com', '0325905331', 'Tòa Nhà Ting Tong 68, Số 5, Ngách 193/220 Đường Phú Diễn', NULL, NULL, NULL, NULL, '0', 0, NULL, NULL),
+(18, 123, 'Hoàng Thiết', 'client@gmail.com', '0325905331', 'Tòa Nhà Ting Tong 68, Số 5, Ngách 193/220 Đường Phú Diễn', NULL, NULL, NULL, NULL, '0', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,10 @@ CREATE TABLE `order_details` (
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price_regular`, `price_sale`) VALUES
 (16, 16, 21, 3, 2400000, 2200000),
-(17, 16, 20, 1, 2200000, NULL);
+(17, 16, 20, 1, 2200000, NULL),
+(18, 17, 21, 4, 2400000, 2200000),
+(19, 18, 21, 2, 2400000, 2200000),
+(20, 18, 20, 1, 2200000, NULL);
 
 -- --------------------------------------------------------
 
@@ -169,7 +174,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `avatar`, `email`, `password`, `type`, `created_at`, `updated_at`, `is_active`) VALUES
 (123, 'Hoàng Thiết', 'assets/uploads/users/1717754158IMG_0278.JPG', 'client@gmail.com', '$2y$10$1oV/eKh8I8ujbzMqIPxqquYZyb44ODTZhC3srE0tILluEkCeaKiti', 'member', '2024-06-07 09:55:58', '2024-06-07 09:55:58', 1),
 (124, 'Hoàng Thiết', 'assets/uploads/users/1717754217378765610_705982248215229_2621046438392557832_n.jpg', 'admin@gmail.com', '$2y$10$w0hRmnmTuSOudtx7y2Na2.Lj9Og/.GcCWZHtugL.L.xYGXSp1/Tau', 'admin', '2024-06-07 09:56:57', '2024-06-07 09:56:57', 1),
-(125, 'Hoàng Thiết', NULL, 'hthiet0707@gmail.com', '$2y$10$yBC2.R77cOrtHWbYOPvc8eTcJncu3f/zyCoZ/3GHirGnAzwdmmPXG', 'member', '2024-06-07 10:32:32', '2024-06-07 10:32:32', 0);
+(125, 'Hoàng Thiết', NULL, 'hthiet0707@gmail.com', '$2y$10$yBC2.R77cOrtHWbYOPvc8eTcJncu3f/zyCoZ/3GHirGnAzwdmmPXG', 'member', '2024-06-07 10:32:32', '2024-06-07 10:32:32', 0),
+(128, 'Hoàng Thiết', NULL, 'hthiet111@gmail.com', '$2y$10$Qbjjsguj9A1asWVfVdXvheYsEqfRZFWqBmWA6WBq4doTwsewQxQnm', 'member', '2024-06-07 13:16:43', '2024-06-07 13:16:43', 0);
 
 --
 -- Indexes for dumped tables
@@ -233,7 +239,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `cart_details`
@@ -251,13 +257,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -269,7 +275,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- Constraints for dumped tables
