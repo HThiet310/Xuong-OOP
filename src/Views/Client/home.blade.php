@@ -12,12 +12,12 @@ Trang chủ
     <div class="image-product">
         <div class="item-image-product" data-aos="fade-up">
             <div class="card">
-                <a href="{{ url('products/' . $product['id']) }}">
+                <a href="{{ url('product/' . $product['id'])}}">
                     <img class="card-img-top" style="max-height: 200px" src="{{ asset($product['img_thumbnail']) }}" alt="Card image">
                 </a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="{{ url('products/' . $product['id']) }}">
+                        <a href="{{ url('product/' . $product['id']) }}">
                             {{ $product['name'] }}</a>
                     </h4>
 
