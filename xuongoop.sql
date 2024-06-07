@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 07, 2024 at 09:05 AM
+-- Generation Time: Jun 07, 2024 at 10:37 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.7
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `oop_xuong`
+-- Database: `xuongoop`
 --
 
 -- --------------------------------------------------------
@@ -52,8 +52,17 @@ CREATE TABLE `cart_details` (
 
 CREATE TABLE `categories` (
   `id` int NOT NULL,
-  `name` varchar(50) NOT NULL
+  `name` varchar(50) NOT NULL,
+  `img_thumbnail` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `img_thumbnail`) VALUES
+(3, 'Giày adidas', 'assets/uploads/categories/1717754824adidas.jpg'),
+(4, 'Giày Nike', 'assets/uploads/categories/1717754841airnike.jpg');
 
 -- --------------------------------------------------------
 
@@ -78,6 +87,13 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `user_name`, `user_email`, `user_phone`, `user_address`, `shipping_name`, `shipping_email`, `shipping_phone`, `shipping_address`, `status_delivery`, `status_payment`, `created_at`, `updated_at`) VALUES
+(16, 125, 'Hoàng Thiết', 'hthiet0707@gmail.com', '0325905331', 'Tòa Nhà Ting Tong 68, Số 5, Ngách 193/220 Đường Phú Diễn', NULL, NULL, NULL, NULL, '0', 0, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -92,6 +108,14 @@ CREATE TABLE `order_details` (
   `price_regular` int NOT NULL,
   `price_sale` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price_regular`, `price_sale`) VALUES
+(16, 16, 21, 3, 2400000, 2200000),
+(17, 16, 20, 1, 2200000, NULL);
 
 -- --------------------------------------------------------
 
@@ -111,6 +135,14 @@ CREATE TABLE `products` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `category_id`, `name`, `img_thumbnail`, `price_regular`, `price_sale`, `overview`, `content`, `created_at`, `updated_at`) VALUES
+(20, 4, 'Giày Nike Dunk', 'assets/uploads/products/1717754900giaynikedunk.jpg', 2200000, NULL, 'Giày Nike', 'Sản phẩm mới', '2024-06-07 10:08:20', '2024-06-07 10:08:20'),
+(21, 3, 'Giày adidas ', 'assets/uploads/products/1717755082giay-adidas-nam-de-mau-den.jpg', 2400000, 2200000, 'Giày Adidas', 'Giày mới', '2024-06-07 10:11:22', '2024-06-07 10:11:22');
 
 -- --------------------------------------------------------
 
@@ -135,8 +167,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `avatar`, `email`, `password`, `type`, `created_at`, `updated_at`, `is_active`) VALUES
-(117, 'Hoàng Thiết', 'assets/uploads/1717658956avatar.jpeg', 'admin@gmail.com', '$2y$10$/62YvxzYC6CQk9qk68ver.WwXxDWhLr9J3px/L43dxhRioFi8uWq6', 'admin', NULL, '2024-06-06 07:29:16', 1),
-(118, 'Hoàng Thiết', 'assets/uploads/1717659055a6.jpeg', 'client@gmail.com', '$2y$10$qWTGdkIzSSwLb7Xyi5y8YeGQOl1C3Y8eDE3XOfblddi/oYKzP7zgS', 'member', '2024-06-06 07:30:55', '2024-06-06 07:30:55', 1);
+(123, 'Hoàng Thiết', 'assets/uploads/users/1717754158IMG_0278.JPG', 'client@gmail.com', '$2y$10$1oV/eKh8I8ujbzMqIPxqquYZyb44ODTZhC3srE0tILluEkCeaKiti', 'member', '2024-06-07 09:55:58', '2024-06-07 09:55:58', 1),
+(124, 'Hoàng Thiết', 'assets/uploads/users/1717754217378765610_705982248215229_2621046438392557832_n.jpg', 'admin@gmail.com', '$2y$10$w0hRmnmTuSOudtx7y2Na2.Lj9Og/.GcCWZHtugL.L.xYGXSp1/Tau', 'admin', '2024-06-07 09:56:57', '2024-06-07 09:56:57', 1),
+(125, 'Hoàng Thiết', NULL, 'hthiet0707@gmail.com', '$2y$10$yBC2.R77cOrtHWbYOPvc8eTcJncu3f/zyCoZ/3GHirGnAzwdmmPXG', 'member', '2024-06-07 10:32:32', '2024-06-07 10:32:32', 0);
 
 --
 -- Indexes for dumped tables
@@ -212,31 +245,31 @@ ALTER TABLE `cart_details`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- Constraints for dumped tables
