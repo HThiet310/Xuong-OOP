@@ -1,79 +1,68 @@
 @extends('layouts.master')
 
 @section('title')
-    Danh sách Sản phẩm
+Danh mục sản phẩm
 @endsection
 
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-lg-12">
-            <div class="white_card card_height_100 mb_30">
-                <div class="white_card_header">
-                    <div class="box_header m-0">
-                        <div class="main-title">
-                            <h1 class="m-0">Danh sách Sản phẩm</h1>
-                        </div>
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <div class="white_card card_height_100 mb_30">
+            <div class="white_card_header">
+                <div class="box_header m-0">
+                    <div class="main-title">
+                        <h1 class="m-0">Danh mục sản phẩm</h1>
                     </div>
                 </div>
-                <div class="white_card_body">
+            </div>
+            <div class="white_card_body">
 
-                    <a class="btn btn-primary" href="{{ url('admin/products/create') }}">Thêm mới sản phẩm</a>
+                <a class="btn btn-primary" href="{{ url('admin/categories/create') }}">Thêm mới danh mục</a>
 
-                    @if (isset($_SESSION['status']) && $_SESSION['status'])
-                        <div class="alert alert-success">
-                            {{ $_SESSION['msg'] }}
-                        </div>
+                @if (isset($_SESSION['status']) && $_SESSION['status'])
+                <div class="alert alert-success">
+                    {{ $_SESSION['msg'] }}
+                </div>
 
-                        @php
-                            unset($_SESSION['status']);
-                            unset($_SESSION['msg']);
-                        @endphp
-                    @endif
+                @php
+                unset($_SESSION['status']);
+                unset($_SESSION['msg']);
+                @endphp
+                @endif
 
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Ảnh sản phẩm</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Giá sản phẩm</th>
-                                    <th>Danh mục</th>
-                                    <th>Ngày nhập sản phẩm</th>
-                                    <th>ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $stt = 1; ?>
-                                @foreach ($products as $product)
-                                    <tr>
-                                        <td><?= $stt++ ?></td>
-                                        <td>
-                                            <img src="{{ asset($product['p.img_thumbnail']) }}" alt="" width="100px">
-                                        </td>
-                                        <td><?= $product['p.name'] ?></td>
-                                        <td><?= $product['p.price'] ?></td>
-                                        <td><?= $product['c.name'] ?></td>
-                                        <td><?= $product['p.created_at'] ?></td>
-                                        <td>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ảnh danh mục</th>
+                                <th>Tên danh mục</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $stt = 1; ?>
+                            @foreach ($categories as $category)
+                            <tr>
+                                <td><?= $stt++ ?></td>
+                                <td>
+                                    <img src="{{ asset($category['img_thumbnail']) }}" alt="Category Image" style="max-width: 100px;">
+                                </td>
+                                <td><?= $category['name'] ?></td>
+                                <td>
 
-                                            <a class="btn btn-info"
-                                                href="{{ url('admin/products/' . $product['id'] . '/show') }}">Xem</a>
-                                            <a class="btn btn-warning"
-                                                href="{{ url('admin/products/' . $product['id'] . '/edit') }}">Sửa</a>
-                                            <a class="btn btn-danger"
-                                                href="{{ url('admin/products/' . $product['id'] . '/delete') }}"
-                                                onclick="return confirm('Chắc chắn xóa không?')">Xóa</a>
+                                    <a class="btn btn-info" href="{{ url('admin/categories/' . $category['id'] . '/show') }}">Xem</a>
+                                    <a class="btn btn-warning" href="{{ url('admin/categories/' . $category['id'] . '/edit') }}">Sửa</a>
+                                    <a class="btn btn-danger" href="{{ url('admin/categories/' . $category['id'] . '/delete') }}" onclick="return confirm('Chắc chắn xóa không?')">Xóa</a>
+                                </td>
+                            </tr>
+                            @endforeach
 
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

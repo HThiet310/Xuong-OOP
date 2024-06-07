@@ -7,6 +7,8 @@ use Hthiet\Xuongoop\Commons\Helper;
 use Hthiet\Xuongoop\Models\User;
 use Rakit\Validation\Validator;
 
+use function PHPSTORM_META\type;
+
 class UserControler extends Controller
 {
     private User $user;
@@ -40,6 +42,7 @@ class UserControler extends Controller
             'password'              => 'required|min:6',
             'confirm_password'      => 'required|same:password',
             'avatar'                => 'uploaded_file:0,2M,png,jpg,jpeg',
+            'type'                  => 'required|in:admin,member',
         ]);
         $validation->validate();
 
@@ -52,13 +55,14 @@ class UserControler extends Controller
             $data = [
                 'name'     => $_POST['name'],
                 'email'    => $_POST['email'],
+                'type'     => $_POST['type'],
                 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
             ];
 
             if (isset($_FILES['avatar']) && $_FILES['avatar']['size'] > 0) {
 
                 $from = $_FILES['avatar']['tmp_name'];
-                $to = 'assets/uploads/' . time() . $_FILES['avatar']['name'];
+                $to = 'assets/uploads/users/' . time() . $_FILES['avatar']['name'];
 
                 if (move_uploaded_file($from, PATH_ROOT . $to)) {
                     $data['avatar'] = $to;
@@ -107,6 +111,7 @@ class UserControler extends Controller
             'name'                  => 'required|max:50',
             'email'                 => 'required|email',
             'password'              => 'min:6',
+            'type'                  => 'required',
             'avatar'                => 'uploaded_file:0,2M,png,jpg,jpeg',
         ]);
         $validation->validate();
@@ -122,6 +127,7 @@ class UserControler extends Controller
                 'email'    => $_POST['email'],
                 'password' => !empty($_POST['password'])
                     ? password_hash($_POST['password'], PASSWORD_DEFAULT) : $user['password'],
+                'type'     => $_POST['type'],
             ];
 
             $flagUpload = false;
@@ -130,7 +136,7 @@ class UserControler extends Controller
                 $flagUpload = true;
 
                 $from = $_FILES['avatar']['tmp_name'];
-                $to = 'assets/uploads/' . time() . $_FILES['avatar']['name'];
+                $to = 'assets/uploads/users/' . time() . $_FILES['avatar']['name'];
 
                 if (move_uploaded_file($from, PATH_ROOT . $to)) {
                     $data['avatar'] = $to;
@@ -162,15 +168,21 @@ class UserControler extends Controller
 
     public function delete($id)
     {
-        $user = $this->user->findByID($id);
 
-        $this->user->delete($id);
+        try {
+            $user = $this->user->findByID($id);
 
-        if (
-            $user['avatar']
-            && file_exists(PATH_ROOT . $user['avatar'])
-        ) {
-            unlink(PATH_ROOT . $user['avatar']);
+            $this->user->delete($id);
+
+            if ($user['avatar'] && file_exists(PATH_ROOT . $user['avatar'])) {
+                unlink(PATH_ROOT . $user['avatar']);
+            }
+
+            $_SESSION['status'] = true;
+            $_SESSION['msg'] = 'Thao tác thành công!';
+        } catch (\Throwable $th) {
+            $_SESSION['status'] = false;
+            $_SESSION['msg'] = 'Thao tác KHÔNG thành công!';
         }
 
         header('Location: ' . url('admin/users'));

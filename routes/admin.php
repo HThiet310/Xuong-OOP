@@ -10,9 +10,23 @@
 //      PUT     -> USER/ID      -> UPDATE ($id)   -> LƯU DỮ LIỆU TỪ FORM CẬP NHẬT VÀO DB
 //      DELETE  -> USER/ID      -> DELETE ($id)   -> XÓA BẢ
 
+use Hthiet\Xuongoop\Controllers\Admin\CategoryController;
 use Hthiet\Xuongoop\Controllers\Admin\DashboardController;
 use Hthiet\Xuongoop\Controllers\Admin\ProductController;
 use Hthiet\Xuongoop\Controllers\Admin\UserControler;
+
+
+// $router->before('GET|POST', '/admin/*.*', function () {
+//     if(!is_logged()){
+//         header('Location: ' . url('login'));
+//         exit();
+//     }
+
+//     if(!is_admin()){
+//         header('Location: ' . url());
+//         exit();
+//     }
+// });
 
 $router->mount('/admin', function () use ($router) {
 
@@ -40,4 +54,16 @@ $router->mount('/admin', function () use ($router) {
         $router->post('/{id}/update',   ProductController::class . '@update');
         $router->get('/{id}/delete',    ProductController::class . '@delete');
     });
+
+    // CRUD CATEGORY
+    $router->mount('/categories', function () use ($router) {
+        $router->get('/',               CategoryController::class . '@index');
+        $router->get('/create',         CategoryController::class . '@create');
+        $router->post('/store',         CategoryController::class . '@store');
+        $router->get('/{id}/show',      CategoryController::class . '@show');
+        $router->get('/{id}/edit',      CategoryController::class . '@edit');
+        $router->post('/{id}/update',   CategoryController::class . '@update');
+        $router->get('/{id}/delete',    CategoryController::class . '@delete');
+    });
+
 });

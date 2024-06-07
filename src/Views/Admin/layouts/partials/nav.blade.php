@@ -41,5 +41,18 @@
             </ul>
         </li>
 
+
+        <li class>
+            <a class="has-arrow" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('assets/admin/img/menu-icon/3.svg') }}" alt>
+                </div>
+                <span>Danh mục sản phẩm</span>
+            </a>
+            <ul>
+                <li><a href="{{ url('admin/categories') }}" >Danh sách danh mục</a></li>
+                <li><a href="{{ url('admin/categories/create') }}">Thêm danh mục</a></li>
+            </ul>
+        </li>
     </ul>
 </nav>

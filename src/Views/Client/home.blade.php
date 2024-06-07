@@ -1,15 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/style1.css') }}">
-</head>
+@section('title')
+Trang chủ
+@endsection
 
-<body>
-    <h1>Welcome {{ $name }} to my website!</h1>
-</body>
+@section('content')
+<div class="row">
 
-</html>
+    @foreach ($products as $product)
+
+    <div class="image-product">
+        <div class="item-image-product" data-aos="fade-up">
+            <div class="card">
+                <a href="{{ url('products/' . $product['id']) }}">
+                    <img class="card-img-top" style="max-height: 200px" src="{{ asset($product['img_thumbnail']) }}" alt="Card image">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="{{ url('products/' . $product['id']) }}">
+                            {{ $product['name'] }}</a>
+                    </h4>
+
+                    <a href="{{ url('cart/add') }}?quantity=1&productID={{ $product['id'] }}" >Thêm vào giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @endforeach
+
+</div>
+</div>
+@endsection

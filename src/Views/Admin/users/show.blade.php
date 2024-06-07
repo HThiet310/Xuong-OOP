@@ -27,10 +27,16 @@
         <tbody>
 
             @foreach ($user as $field => $value)
-                <tr>
-                    <td>{{ $field }}</td>
-                    <td>{{ $value }}</td>
-                </tr>
+            <tr>
+                <td>{{ $field }}</td>
+                <td>
+                    @if ($field === 'avatar')
+                    <img src="{{ asset($value) }}" alt="User Image" style="max-width: 100px;">
+                    @else
+                    {{ $value }}
+                    @endif
+                </td>
+            </tr>
             @endforeach
 
         </tbody>

@@ -1,59 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Thêm mới sản phẩm</title>
+@section('title')
+Thêm mới danh mục
+@endsection
 
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('content')
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <div class="white_card card_height_100 mb_30">
+            <div class="white_card_header">
+                <div class="box_header m-0">
+                    <div class="main-title">
+                        <h1 class="m-0">Thêm mới danh mục</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="white_card_body">
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+                @if (!empty($_SESSION['errors']))
+                <div class="alert alert-warning">
+                    <ul>
+                        @foreach ($_SESSION['errors'] as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
 
-<body>
-    <h1>Thêm mới sản phẩm</h1>
+                    @php
+                    unset($_SESSION['errors']);
+                    @endphp
+                </div>
+                @endif
 
-	@if (!empty($_SESSION['errors']))
-		<div class="alert alert-warning">
-			<ul>
-				@foreach ($_SESSION['errors'] as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-			</ul>
+                <div class="table-responsive">
+                    <form class="mx-1 mx-md-4" action="{{ url('admin/products/store') }}" enctype="multipart/form-data" method="POST">
 
-			@php
-				unset($_SESSION['errors']);
-			@endphp
-		</div>
-	@endif
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="name">Tên sản phẩm:</label>
+                                <input type="text" id="name" name="name" class="form-control" />
+                            </div>
+                        </div>
 
-    <form action="{{ url('admin/users/store') }}" enctype="multipart/form-data" method="POST">
-        <div class="mb-3 mt-3">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="img_thumbnail" name="img_thumbnail">Chọn ảnh:</label>
+                                <input type="file" name="img_thumbnail" id="img_thumbnail" onchange="loadFile(event)" required multiple>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center mb-4">
+
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="price_regular">Giá sản phẩm:</label>
+                                <input type="number" id="price_regular" name="price_regular" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="price_sale">Giá khuyến mãi:</label>
+                                <input type="number" id="price_sale" name="price_sale" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center mb-4">
+
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="category_id">Danh mục sản phẩm:</label>
+                                <select class="form-select" name="category_id" id="category_id">
+                                    @foreach ($categoryPluck as $id => $name)
+                                        <option value="{{ $id }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="overview">Tổng quan:</label>
+                                <textarea type="number" id="overview" name="overview" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center mb-4">
+                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="content">Thông tin:</label>
+                                <textarea type="number" id="content" name="content" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Thêm mới</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="mb-3 mt-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="avatar" class="form-label">Avatar:</label>
-            <input type="file" class="form-control" id="avatar" placeholder="Enter avatar" name="avatar">
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="password" class="form-label">Password:</label>
-            <input type="text" class="form-control" id="password" placeholder="Enter password" name="password">
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="password" class="form-label">Confirm Password:</label>
-            <input type="text" class="form-control" id="confirm_password" placeholder="Enter confirm_password" name="confirm_password">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</body>
-
-</html>
+    </div>
+</div>
+@endsection

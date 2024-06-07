@@ -37,7 +37,8 @@
                                     <th>STT</th>
                                     <th>Ảnh sản phẩm</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>Giá sản phẩm</th>
+                                    <th>Giá gốc</th>
+                                    <th>Giá khuyến mãi</th>
                                     <th>Danh mục</th>
                                     <th>Ngày nhập sản phẩm</th>
                                     <th>ACTION</th>
@@ -49,12 +50,13 @@
                                     <tr>
                                         <td><?= $stt++ ?></td>
                                         <td>
-                                            <img src="{{ asset($product['p.img_thumbnail']) }}" alt="" width="100px">
+                                            <img src="{{ asset($product['img_thumbnail']) }}" alt="" width="100px">
                                         </td>
-                                        <td><?= $product['p.name'] ?></td>
-                                        <td><?= $product['p.price'] ?></td>
-                                        <td><?= $product['c.name'] ?></td>
-                                        <td><?= $product['p.created_at'] ?></td>
+                                        <td><?= $product['name'] ?></td>
+                                        <td><?= $product['price_regular'] ?></td>
+                                        <td><?= $product['price_sale'] ?></td>
+                                        <td><?= $product['c_name'] ?></td>
+                                        <td><?= $product['created_at'] ?></td>
                                         <td>
 
                                             <a class="btn btn-info"
