@@ -15,6 +15,6 @@ class User extends Model
             ->from($this->tableName)
             ->where('email = ?')
             ->setParameter(0, $email)
-            ->fetchAllAssociative();
+            ->fetchAssociative();
     }
 }

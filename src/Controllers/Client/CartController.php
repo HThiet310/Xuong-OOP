@@ -29,6 +29,7 @@ class CartController extends Controller
         // Khởi tạo SESSION cart
         // Check n đang đang đăng nhập hay không
         $key = 'cart';
+
         if (isset($_SESSION['user'])) {
             $key .= '-' . $_SESSION['user']['id'];
         }
@@ -37,7 +38,6 @@ class CartController extends Controller
 
             $_SESSION[$key][$product['id']] = $product + ['quantity' => $_GET['quantity'] ?? 1];
         } else {
-
             $_SESSION[$key][$product['id']]['quantity'] += $_GET['quantity'];
         }
 

@@ -16,17 +16,17 @@ use Hthiet\Xuongoop\Controllers\Admin\ProductController;
 use Hthiet\Xuongoop\Controllers\Admin\UserControler;
 
 
-// $router->before('GET|POST', '/admin/*.*', function () {
-//     if(!is_logged()){
-//         header('Location: ' . url('login'));
-//         exit();
-//     }
+$router->before('GET|POST', '/admin/*.*', function () {
+    if(!is_logged()){
+        header('Location: ' . url('login'));
+        exit();
+    }
 
-//     if(!is_admin()){
-//         header('Location: ' . url());
-//         exit();
-//     }
-// });
+    if(!is_admin()){
+        header('Location: ' . url());
+        exit();
+    }
+});
 
 $router->mount('/admin', function () use ($router) {
 

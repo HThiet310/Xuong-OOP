@@ -3,6 +3,7 @@
 namespace Hthiet\Xuongoop\Controllers\Client;
 
 use Hthiet\Xuongoop\Commons\Controller;
+use Hthiet\Xuongoop\Commons\Helper;
 use Hthiet\Xuongoop\Models\User;
 
 class AuthenController extends Controller
@@ -16,45 +17,43 @@ class AuthenController extends Controller
 
     public function formShowLogin()
     {
-        // avoid_login();
+        avoid_login();
 
-        $this->renderViewClient('authens.login',[]);
+        $this->renderViewClient('authens.login');
     }
 
-    public function login()
-    {
-        // avoid_login();
+    public function login() {
+        avoid_login();
 
         try {
             $user = $this->user->findByEmail($_POST['email']);
-
-            if(empty($user)) {
-                throw new \Exception('Tài khoản chưa tồn tại');
+            if (empty($user)) {
+                throw new \Exception('Không tồn tại email: ' . $_POST['email']);
             }
 
-            $flag = password_verify($_POST['password'], $user[0]['password']);
-            if($flag) {
+            $flag = password_verify($_POST['password'], $user['password']); 
+            if ($flag) {
+
                 $_SESSION['user'] = $user;
 
                 unset($_SESSION['cart']);
 
-                if($user['type'] == 'admin') {
-                    header('Location: ' . url('admin/'));
-                    exit();
-                } 
+                if ($user['type'] == 'admin') {
+                    header('Location: ' . url('admin/') );
+                    exit;
+                }
 
-                header('Location: ' . url());
-                exit();
+                header('Location: ' . url() );
+                exit;
             }
 
-            throw new \Exception('Sai mật khẩu');
+            throw new \Exception('Password không đúng');
         } catch (\Throwable $th) {
-            $_SESSION['errors'][] = $th->getMessage();
+            $_SESSION['error'] = $th->getMessage();
 
-            header('Location: ' . url('login'));
-            exit();
+            header('Location: ' . url('login') );
+            exit;
         }
-
     }
 
     public function logout()
